@@ -1,1 +1,5 @@
-<p>Welcome to Cat home!</p>
+<ul>
+  <% @galleries.each do |(name, gallery)| %>
+    <li><a href="/galleries/<%= name %>"><%= name %></a></li>
+  <% end %>
+</ul>
