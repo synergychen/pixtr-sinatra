@@ -1,3 +1,7 @@
-<% @names.each do |name| %>
-  <img src="/<%= name %>" />
-<% end %>
+<h2>Viewing the <%= @name %> gallery</h2>
+
+<ul>
+  <% @images.each do |image| %>
+    <img src="/<%= image %>" />
+  <% end %>
+</ul>

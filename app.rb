@@ -10,9 +10,12 @@ get "/" do
   erb :home
 end
 
-get "/galleries/:name" do
-  # params[:name] returns String
-  @name = params[:name]
-  @names = GALLERIES[@name]
+get "/galleries/:id" do
+  id = params[:id]
+  name_gallery_query = "SELECT name FROM galleries WHERE id = $1"
+  name_gallery = database.exec_params(name_gallery_query, [id])
+  @name = name_gallery.first["name"]
+  puts @name.inspect
+  @images = []
   erb :galleries
 end
