@@ -1,17 +1,20 @@
 require "sinatra"
 require "sinatra/reloader" if development?
+require "pg"
 
-GALLERIES = {
-  "cats" => ["colonel_meow.jpg", "grumpy_cat.png"],
-  "dogs" => ["shibe.png"]
-}
+database = PG.connect({ dbname: "photo_gallery" })
+gallery_result = database.exec_params("SELECT * FROM galleries")
 
 get "/" do
-  @galleries = GALLERIES
+  @gallery_name = []
+  gallery_result.each do |gallery|
+    @gallery_name << gallery["name"]
+  end
   erb :home
 end
 
 get "/galleries/:name" do
-  @names = GALLERIES[params[:name]]
+  @name = params[:name]
+  @names = GALLERIES[@name]
   erb :galleries
 end

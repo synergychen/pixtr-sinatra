@@ -1,5 +1,5 @@
 <ul>
-  <% @galleries.each do |(name, gallery)| %>
+  <% @gallery_name.each do |name| %>
     <li><a href="/galleries/<%= name %>"><%= name %></a></li>
   <% end %>
 </ul>
